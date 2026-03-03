@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <RootNamespace>FolderOrganizer.Shell</RootNamespace>
+    <AssemblyName>FolderOrganizer.Shell</AssemblyName>
+    <LangVersion>latest</LangVersion>
+    <!-- Required for COM registration -->
+    <RegisterForCOMInterop>true</RegisterForCOMInterop>
+    <ComVisible>false</ComVisible>
+    <Platforms>x64</Platforms>
+    <PlatformTarget>x64</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FolderOrganizer.Core\FolderOrganizer.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Drawing" />
+  </ItemGroup>
+</Project>
