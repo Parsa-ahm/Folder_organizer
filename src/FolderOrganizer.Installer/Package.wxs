@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+     xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+
+  <Package Name="Folder Organizer"
+           Manufacturer="FolderOrganizer"
+           Version="1.0.0"
+           UpgradeCode="FC2F5CAE-51C0-4566-B4AE-B86AF9C2C2A9"
+           Scope="perMachine">
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of Folder Organizer is already installed." />
+
+    <!-- ── Directory layout ──────────────────────────────────────────── -->
+    <StandardDirectory Id="ProgramFiles64Folder">
+      <Directory Id="INSTALLFOLDER" Name="FolderOrganizer" />
+    </StandardDirectory>
+
+    <StandardDirectory Id="ProgramMenuFolder">
+      <Directory Id="ApplicationProgramsFolder" Name="Folder Organizer" />
+    </StandardDirectory>
+
+    <!-- ── Shell DLL — all COM registry keys written explicitly ─────── -->
+    <!--   (MSI adds/removes them atomically; no regsvr32 needed)        -->
+    <Component Id="ShellDll" Directory="INSTALLFOLDER" Guid="8721657D-6C0A-4637-950C-8A6845864DCD">
+      <File Id="ShellDllFile"
+            Source="$(var.ShellOutput)\FolderOrganizer.Shell.dll"
+            KeyPath="yes" />
+
+      <!-- Context menu handler CLSID -->
+      <RegistryValue Root="HKLM"
+                     Key="SOFTWARE\Classes\CLSID\{2C6B4E1A-3D7F-4A82-B5C9-0E1F6D2A8B3C}"
+                     Value="FolderOrganizer Context Menu" Type="string" />
+      <RegistryValue Root="HKLM"
+                     Key="SOFTWARE\Classes\CLSID\{2C6B4E1A-3D7F-4A82-B5C9-0E1F6D2A8B3C}\InprocServer32"
+                     Value="[INSTALLFOLDER]FolderOrganizer.Shell.dll" Type="string" />
+      <RegistryValue Root="HKLM"
+                     Key="SOFTWARE\Classes\CLSID\{2C6B4E1A-3D7F-4A82-B5C9-0E1F6D2A8B3C}\InprocServer32"
+                     Name="ThreadingModel" Value="Apartment" Type="string" />
+      <RegistryValue Root="HKLM"
+                     Key="SOFTWARE\Classes\CLSID\{2C6B4E1A-3D7F-4A82-B5C9-0E1F6D2A8B3C}\ProgID"
+                     Value="FolderOrganizer.ContextMenu" Type="string" />
+
+      <!-- Shell extension hooks -->
+      <RegistryValue Root="HKLM"
+                     Key="SOFTWARE\Classes\*\shellex\ContextMenuHandlers\FolderOrganizer"
+                     Value="{2C6B4E1A-3D7F-4A82-B5C9-0E1F6D2A8B3C}" Type="string" />
+      <RegistryValue Root="HKLM"
+                     Key="SOFTWARE\Classes\Folder\shellex\ContextMenuHandlers\FolderOrganizer"
+                     Value="{2C6B4E1A-3D7F-4A82-B5C9-0E1F6D2A8B3C}" Type="string" />
+      <RegistryValue Root="HKLM"
+                     Key="SOFTWARE\Classes\Directory\shellex\ContextMenuHandlers\FolderOrganizer"
+                     Value="{2C6B4E1A-3D7F-4A82-B5C9-0E1F6D2A8B3C}" Type="string" />
+
+      <!-- Property handler CLSID -->
+      <RegistryValue Root="HKLM"
+                     Key="SOFTWARE\Classes\CLSID\{7F3A1D4E-9C2B-4E68-A1F5-3B8C0D6E2A94}"
+                     Value="FolderOrganizer Property Handler" Type="string" />
+      <RegistryValue Root="HKLM"
+                     Key="SOFTWARE\Classes\CLSID\{7F3A1D4E-9C2B-4E68-A1F5-3B8C0D6E2A94}\InprocServer32"
+                     Value="[INSTALLFOLDER]FolderOrganizer.Shell.dll" Type="string" />
+      <RegistryValue Root="HKLM"
+                     Key="SOFTWARE\Classes\CLSID\{7F3A1D4E-9C2B-4E68-A1F5-3B8C0D6E2A94}\InprocServer32"
+                     Name="ThreadingModel" Value="Both" Type="string" />
+      <RegistryValue Root="HKLM"
+                     Key="SOFTWARE\Microsoft\Windows\CurrentVersion\PropertySystem\PropertyHandlers\*"
+                     Value="{7F3A1D4E-9C2B-4E68-A1F5-3B8C0D6E2A94}" Type="string" />
+
+      <!-- Approved shell extensions -->
+      <RegistryValue Root="HKLM"
+                     Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved"
+                     Name="{2C6B4E1A-3D7F-4A82-B5C9-0E1F6D2A8B3C}"
+                     Value="FolderOrganizer Context Menu" Type="string" />
+    </Component>
+
+    <!-- ── App executable ────────────────────────────────────────────── -->
+    <Component Id="AppExe" Directory="INSTALLFOLDER" Guid="*">
+      <File Id="AppExeFile"
+            Source="$(var.AppOutput)\FolderOrganizer.App.exe"
+            KeyPath="yes" />
+    </Component>
+
+    <!-- ── Windows App SDK runtime (self-contained publish) ────────── -->
+    <Component Id="AppRuntimeFiles" Directory="INSTALLFOLDER" Guid="*">
+      <File Id="WinRTRuntimeFile"
+            Source="$(var.AppOutput)\WinRT.Runtime.dll"
+            KeyPath="yes" />
+    </Component>
+
+    <!-- ── Start Menu shortcut ───────────────────────────────────────── -->
+    <Component Id="AppShortcut" Directory="ApplicationProgramsFolder" Guid="*">
+      <Shortcut Id="AppStartMenuShortcut"
+                Name="Folder Organizer"
+                Description="Color-code files and folders with custom icons and tags"
+                Target="[INSTALLFOLDER]FolderOrganizer.App.exe"
+                WorkingDirectory="INSTALLFOLDER" />
+      <RemoveFolder Id="CleanupStartMenu" Directory="ApplicationProgramsFolder" On="uninstall" />
+      <RegistryValue Root="HKCU"
+                     Key="Software\FolderOrganizer"
+                     Name="StartMenuInstalled" Value="1" Type="integer"
+                     KeyPath="yes" />
+    </Component>
+
+    <!-- ── Property schema file ──────────────────────────────────────── -->
+    <Component Id="PropertySchema" Directory="INSTALLFOLDER" Guid="*">
+      <File Id="PropDescFile"
+            Source="$(var.ShellSource)\FolderOrganizer.propdesc"
+            KeyPath="yes" />
+    </Component>
+
+    <!-- ── Feature tree ──────────────────────────────────────────────── -->
+    <Feature Id="Complete" Title="Folder Organizer" Level="1">
+      <ComponentRef Id="ShellDll" />
+      <ComponentRef Id="AppExe" />
+      <ComponentRef Id="AppRuntimeFiles" />
+      <ComponentRef Id="AppShortcut" />
+      <ComponentRef Id="PropertySchema" />
+    </Feature>
+
+    <!-- ── Minimal installer UI ──────────────────────────────────────── -->
+    <ui:WixUI Id="WixUI_Minimal" />
+
+  </Package>
+</Wix>

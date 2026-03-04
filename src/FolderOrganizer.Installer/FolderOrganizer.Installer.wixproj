@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="WixToolset.Sdk/4.0.6">
+  <PropertyGroup>
+    <OutputType>Package</OutputType>
+    <OutputName>FolderOrganizer</OutputName>
+    <Platform>x64</Platform>
+    <Platforms>x64</Platforms>
+
+    <!-- Release build outputs from sibling projects -->
+    <AppOutput>$(MSBuildThisFileDirectory)..\FolderOrganizer.App\bin\Release\net8.0-windows10.0.19041.0\win-x64</AppOutput>
+    <ShellOutput>$(MSBuildThisFileDirectory)..\FolderOrganizer.Shell\bin\Release\net48</ShellOutput>
+    <ShellSource>$(MSBuildThisFileDirectory)..\FolderOrganizer.Shell</ShellSource>
+
+    <!-- Pass MSBuild properties as WiX preprocessor variables -->
+    <DefineConstants>AppOutput=$(AppOutput);ShellOutput=$(ShellOutput);ShellSource=$(ShellSource)</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="WixToolset.UI.wixext" Version="4.0.6" />
+    <PackageReference Include="WixToolset.Util.wixext" Version="4.0.6" />
+  </ItemGroup>
+</Project>
