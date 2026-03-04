@@ -92,6 +92,28 @@ public static class IconGenerator
         return result;
     }
 
+    /// <summary>
+    /// Loads an icon/image file and scales it to a square thumbnail.
+    /// Returns null if the file cannot be read or is not a valid image.
+    /// </summary>
+    public static Bitmap? LoadPreviewThumbnail(string path, int size = 32)
+    {
+        try
+        {
+            using (var original = new Bitmap(path))
+            {
+                var thumb = new Bitmap(size, size, PixelFormat.Format32bppArgb);
+                using (var g = Graphics.FromImage(thumb))
+                {
+                    g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                    g.DrawImage(original, 0, 0, size, size);
+                }
+                return thumb;
+            }
+        }
+        catch { return null; }
+    }
+
     private static float Lerp(float a, float b, float t) => a + (b - a) * t;
     private static float Clamp(float v) => v < 0f ? 0f : v > 1f ? 1f : v;
 
