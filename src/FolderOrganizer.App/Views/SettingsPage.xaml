@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Page
+    x:Class="FolderOrganizer.App.Views.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Spacing="16" Padding="24">
+
+            <TextBlock Text="Settings" Style="{StaticResource TitleTextBlockStyle}" />
+
+            <!-- ============================================================ -->
+            <!-- DANGER ZONE -->
+            <!-- ============================================================ -->
+            <Expander Header="Danger Zone" IsExpanded="False"
+                      HorizontalAlignment="Stretch"
+                      HorizontalContentAlignment="Stretch">
+                <StackPanel Spacing="12" Padding="4,8">
+
+                    <TextBlock
+                        Text="These actions are irreversible. Make sure you know what you are doing."
+                        TextWrapping="Wrap"
+                        Foreground="{ThemeResource SystemFillColorCriticalBrush}"
+                        Style="{StaticResource CaptionTextBlockStyle}" />
+
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Button
+                            x:Name="ClearAllBtn"
+                            Content="Clear All Customizations"
+                            Foreground="Red"
+                            Click="ClearAll"
+                            ToolTipService.ToolTip="Strips ADS metadata from every file and folder recorded in the touch log." />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Button
+                            x:Name="ResetTagsBtn"
+                            Content="Reset Tag Registry"
+                            Click="ResetTags"
+                            ToolTipService.ToolTip="Deletes all tag definitions from tags.json." />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Button
+                            x:Name="UnregisterShellBtn"
+                            Content="Unregister Context Menu"
+                            Click="UnregisterShell"
+                            ToolTipService.ToolTip="Runs regsvr32 /u FolderOrganizer.Shell.dll to remove the shell extension." />
+                    </StackPanel>
+
+                </StackPanel>
+            </Expander>
+
+            <!-- ============================================================ -->
+            <!-- EXPLORER COLUMN -->
+            <!-- ============================================================ -->
+            <ToggleSwitch
+                x:Name="TagsColumnToggle"
+                Header="Show Tags column in Explorer"
+                Toggled="TagsColumnToggled"
+                OffContent="Disabled"
+                OnContent="Enabled" />
+
+            <!-- ============================================================ -->
+            <!-- VERSION -->
+            <!-- ============================================================ -->
+            <TextBlock
+                Text="Folder Organizer  |  Version 1.0.0"
+                Style="{StaticResource CaptionTextBlockStyle}"
+                Foreground="{ThemeResource SystemFillColorNeutralBrush}" />
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>

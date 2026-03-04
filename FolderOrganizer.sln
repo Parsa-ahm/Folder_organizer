@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A7708A86
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FolderOrganizer.Core.Tests", "tests\FolderOrganizer.Core.Tests\FolderOrganizer.Core.Tests.csproj", "{2DF2758C-2731-4AEE-8592-F5D24E0220F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FolderOrganizer.App", "src\FolderOrganizer.App\FolderOrganizer.App.csproj", "{EEDA38DD-5FEF-4144-A9AA-049FA53F833C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,10 +36,15 @@ Global
 		{2DF2758C-2731-4AEE-8592-F5D24E0220F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DF2758C-2731-4AEE-8592-F5D24E0220F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DF2758C-2731-4AEE-8592-F5D24E0220F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEDA38DD-5FEF-4144-A9AA-049FA53F833C}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{EEDA38DD-5FEF-4144-A9AA-049FA53F833C}.Debug|Any CPU.Build.0 = Debug|x86
+		{EEDA38DD-5FEF-4144-A9AA-049FA53F833C}.Release|Any CPU.ActiveCfg = Release|x86
+		{EEDA38DD-5FEF-4144-A9AA-049FA53F833C}.Release|Any CPU.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{01DBBBCA-ADEE-497F-B94F-64D97D525A26} = {B10AE44C-1A93-4093-8AC7-65596070D3B4}
 		{3EEA3957-0BFE-4D1F-85BA-F4A9FD0AC4AD} = {B10AE44C-1A93-4093-8AC7-65596070D3B4}
 		{2DF2758C-2731-4AEE-8592-F5D24E0220F1} = {A7708A86-19EF-4EA4-A074-894208F31A60}
+		{EEDA38DD-5FEF-4144-A9AA-049FA53F833C} = {B10AE44C-1A93-4093-8AC7-65596070D3B4}
 	EndGlobalSection
 EndGlobal

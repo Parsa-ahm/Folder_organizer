@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Page
+    x:Class="FolderOrganizer.App.Views.ThemesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Spacing="16" Padding="24">
+
+            <TextBlock Text="Themes" Style="{StaticResource TitleTextBlockStyle}" />
+
+            <!-- Informational banner -->
+            <InfoBar
+                Title="How to import"
+                Message="Download a .vsix icon theme from the VS Code Marketplace, then click Import Theme below. Icons will appear in Explorer after the next restart."
+                Severity="Informational"
+                IsOpen="True"
+                IsClosable="False" />
+
+            <!-- Action buttons -->
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <Button
+                    Content="Browse VS Code Marketplace"
+                    Click="OpenMarketplace" />
+
+                <Button
+                    Content="Import Theme (.vsix / .zip)"
+                    Style="{StaticResource AccentButtonStyle}"
+                    Click="ImportTheme" />
+            </StackPanel>
+
+            <!-- Active theme expander -->
+            <Expander Header="Active Theme" IsExpanded="True"
+                      HorizontalAlignment="Stretch"
+                      HorizontalContentAlignment="Stretch">
+                <StackPanel Spacing="8" Padding="4,8">
+                    <TextBlock x:Name="ActiveThemeLabel" Text="No theme applied" />
+                    <Button Content="Remove Theme" Click="RemoveTheme" />
+                </StackPanel>
+            </Expander>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>
