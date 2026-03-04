@@ -4,8 +4,9 @@
     <RootNamespace>FolderOrganizer.Shell</RootNamespace>
     <AssemblyName>FolderOrganizer.Shell</AssemblyName>
     <LangVersion>latest</LangVersion>
-    <!-- Required for COM registration -->
-    <RegisterForCOMInterop>true</RegisterForCOMInterop>
+    <!-- RegisterForCOMInterop is handled by regsvr32 at install time, not by dotnet build
+         (RegisterAssembly task is not supported by the .NET Core SDK MSBuild) -->
+    <RegisterForCOMInterop>false</RegisterForCOMInterop>
     <ComVisible>false</ComVisible>
     <Platforms>x64</Platforms>
     <PlatformTarget>x64</PlatformTarget>

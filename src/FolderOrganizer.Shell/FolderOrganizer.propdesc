@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  FolderOrganizer Windows Property Description Schema
+  Registers the "FolderOrganizer.Tags" Shell property so Explorer can show
+  an "Organizer Tags" column that is sortable and filterable.
+
+  Install via: PSCoInstall /s FolderOrganizer.propdesc
+  (invoked by the WiX installer custom action)
+
+  formatID must match Guids.PropertySchema in Guids.cs:
+    {4A9C3E7B-2D1F-4B85-C6A0-8E3D5F1B7C2E}
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://schemas.microsoft.com/windows/2006/propertydescription"
+        schemaVersion="1.0">
+  <propertyDescriptionList publisher="FolderOrganizer" product="FolderOrganizer">
+
+    <propertyDescription
+        name="FolderOrganizer.Tags"
+        formatID="{4A9C3E7B-2D1F-4B85-C6A0-8E3D5F1B7C2E}"
+        propID="1">
+
+      <description>Tags assigned by FolderOrganizer</description>
+
+      <searchInfo inInvertedIndex="true" isColumn="true" />
+
+      <typeInfo
+          type="String"
+          multipleValues="false"
+          isInnate="false"
+          isGroup="false"
+          aggregationType="Default"
+          isTreeProperty="false"
+          isViewable="true" />
+
+      <labelInfo
+          label="Organizer Tags"
+          sortDescription="General"
+          invitationText="Add tags..." />
+
+      <displayInfo
+          displayType="String"
+          defaultColumnWidth="20"
+          displayAlignment="Left"
+          defaultSortDirection="Ascending"
+          editInvitation="Add tags..."
+          editFormat="Default" />
+
+    </propertyDescription>
+
+  </propertyDescriptionList>
+</schema>
